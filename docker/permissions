@@ -1,0 +1,1 @@
+sudo chown -R ziegler /sys/bus/usb/devices/2-3

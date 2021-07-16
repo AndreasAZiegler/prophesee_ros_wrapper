@@ -1,0 +1,1 @@
+rocker --nvidia --x11 --user --home --privileged --volume /dev/bus/usb:/dev/bus/usb --volume /data:/data -- prophesee-ros
