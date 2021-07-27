@@ -1,7 +1,7 @@
 FROM osrf/ros:noetic-desktop
 
 # Get dependencies
-RUN apt-get update && apt-get install -y python3-vcstool python3-catkin-tools python3-osrf-pycommon git
+RUN apt-get update && apt-get install -y python3-vcstool python3-catkin-tools python3-osrf-pycommon git gdb cmake-curses-gui
 
 # Get ROS dependencies
 RUN apt-get install -y ros-noetic-rqt*
@@ -29,6 +29,7 @@ ADD essentials.list /etc/apt/sources.list.d/essentials.list
 RUN apt-get update && apt-get install -y metavision-*
 
 # Add utility scripts
+RUN apt -y install jq
 ADD merge-compile-commands /usr/local/bin/merge-compile-commands
 RUN chmod +x /usr/local/bin/merge-compile-commands
 
