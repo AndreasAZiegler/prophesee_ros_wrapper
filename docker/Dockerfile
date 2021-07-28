@@ -8,7 +8,7 @@ RUN apt-get install -y ros-noetic-rqt*
 
 # Install OpenEB
 RUN apt -y install apt-utils build-essential software-properties-common wget unzip curl
-RUN apt -y install cmake  libopencv-dev git # CMake, OpenCV, and Git
+RUN apt -y install cmake libopencv-dev git # CMake, OpenCV, and Git
 RUN apt -y install libboost-all-dev libboost-program-options-dev libusb-1.0-0-dev libeigen3-dev # Boost, Libusb and eigen3
 RUN apt -y install libglew-dev libglfw3-dev
 RUN apt -y install libgtest-dev  # gtest
