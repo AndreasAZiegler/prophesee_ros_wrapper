@@ -1,0 +1,6 @@
+sudo apt update
+sudo apt install linux-tools
+sudo rm /usr/bin/x11perf
+sudo ln -s /usr/lib/linux-tools/5.4.0-80-generic/perf /usr/bin/perf
+
+rosrun --prefix 'perf record --call-graph dwarf'
