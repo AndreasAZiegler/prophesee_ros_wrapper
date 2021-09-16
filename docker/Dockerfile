@@ -28,14 +28,8 @@ RUN cd ~ && \
 ADD essentials.list /etc/apt/sources.list.d/essentials.list
 RUN apt-get update && apt-get install -y metavision-*
 
-# Install folly
-RUN cd ~ && \
-    git clone https://github.com/facebook/folly.git && \
-    cd folly && \
-    ./build.sh
-
 # Install profiling tools
-RUN apt-get install -y linux-tools-generic hotspot
+RUN apt-get update && apt-get install -y linux-tools-generic hotspot
 RUN rm /usr/bin/perf
 RUN ln -s /usr/lib/linux-tools/5.4.0-80-generic/perf /usr/bin/perf
 
