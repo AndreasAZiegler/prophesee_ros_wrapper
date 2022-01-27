@@ -7,26 +7,35 @@ RUN apt-get update && apt-get install -y python3-vcstool python3-catkin-tools py
 RUN apt-get install -y ros-noetic-rqt*
 
 # Install OpenEB
-RUN apt -y install apt-utils build-essential software-properties-common wget unzip curl
-RUN apt -y install cmake libopencv-dev git # CMake, OpenCV, and Git
-RUN apt -y install libboost-all-dev libboost-program-options-dev libusb-1.0-0-dev libeigen3-dev # Boost, Libusb and eigen3
-RUN apt -y install libglew-dev libglfw3-dev
-RUN apt -y install libgtest-dev  # gtest
-RUN apt -y install libcanberra-gtk-module mesa-utils
-RUN apt -y install python3-pip python3-distutils  # the python package installer
-RUN python3 -m pip install pip --upgrade  # upgrade pip
-RUN python3 -m pip install pytest "numpy==1.19.5"
+#RUN apt -y install apt-utils build-essential software-properties-common wget unzip curl
+#RUN apt -y install cmake libopencv-dev git
+#RUN apt -y install libboost-all-dev libusb-1.0-0-dev libeigen3-dev
+#RUN apt -y install libglew-dev libglfw3-dev
+#RUN apt -y install libgtest-dev
+#RUN apt -y install python3-pip python3-distutils  # the python package installer
+#RUN python3 -m pip install pip --upgrade  # upgrade pip
+#RUN python3 -m pip install "numpy==1.19.5" "opencv-python>=4.2.0.34" pytest
 
-RUN cd ~ && \
-    git clone https://github.com/prophesee-ai/openeb.git && \
-    cd openeb && \
-    mkdir build && cd build && \
-    cmake .. -DBUILD_TESTING=OFF -DCOMPILE_PYTHON3_BINDINGS=OFF && \
-    cmake --build . --config Release -- -j && \
-    cmake --build . --target install
+#RUN cd ~ && \
+#    git clone https://github.com/prophesee-ai/openeb.git && \
+#    cd openeb && \
+#    mkdir build && cd build && \
+#    cmake .. -DBUILD_TESTING=OFF -DCOMPILE_PYTHON3_BINDINGS=OFF && \
+#    cmake --build . --config Release -- -j && \
+#    cmake --build . --target install
+
+#ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+# Install metavision
+RUN apt -y install libcanberra-gtk-module mesa-utils
+RUN apt -y install python3-pip python3-tk
+RUN apt -y install python3.8-dev  # where X is 6, 7 or 8 depending on your Python version (3.6, 3.7 or 3.8)
+RUN python3 -m pip install pip --upgrade
+RUN python3 -m pip install "numpy==1.19.5" "opencv-python>=4.2.0.34" matplotlib jupyter pandas
 
 ADD essentials.list /etc/apt/sources.list.d/essentials.list
-RUN apt-get update && apt-get install -y metavision-*
+#RUN apt-get update && apt-get install -y metavision-hal-prophesee-plugins
+RUN apt-get update && apt-get install -y metavision-essentials metavision-*
 
 # Install profiling tools
 RUN apt-get update && apt-get install -y linux-tools-generic hotspot
