@@ -27,15 +27,14 @@ RUN apt-get install -y ros-noetic-rqt*
 #ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 # Install metavision
-RUN apt -y install libcanberra-gtk-module mesa-utils
-RUN apt -y install python3-pip python3-tk
-RUN apt -y install python3.8-dev  # where X is 6, 7 or 8 depending on your Python version (3.6, 3.7 or 3.8)
+RUN apt-get install -y libcanberra-gtk-module mesa-utils
+RUN apt-get install -y python3-pip python3-tk
+RUN apt-get install -y python3.8-dev  # where X is 6, 7 or 8 depending on your Python version (3.6, 3.7 or 3.8)
 RUN python3 -m pip install pip --upgrade
 RUN python3 -m pip install "numpy==1.19.5" "opencv-python>=4.2.0.34" matplotlib jupyter pandas
 
 ADD essentials.list /etc/apt/sources.list.d/essentials.list
-#RUN apt-get update && apt-get install -y metavision-hal-prophesee-plugins
-RUN apt-get update && apt-get install -y metavision-essentials metavision-*
+RUN apt-get update && apt-get install -y metavision-essentials
 
 # Install profiling tools
 RUN apt-get update && apt-get install -y linux-tools-generic hotspot
