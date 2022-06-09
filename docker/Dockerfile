@@ -1,10 +1,10 @@
 FROM osrf/ros:noetic-desktop
 
 # Get dependencies
-RUN apt-get update && apt-get install -y python3-vcstool python3-catkin-tools python3-osrf-pycommon git gdb cmake-curses-gui
+RUN apt-get update && apt-get install -y git gdb cmake-curses-gui
 
 # Get ROS dependencies
-RUN apt-get install -y ros-noetic-rqt*
+RUN apt-get install -y python3-vcstool python3-catkin-tools python3-osrf-pycommon ros-noetic-rqt*
 
 # Install OpenEB
 #RUN apt -y install apt-utils build-essential software-properties-common wget unzip curl
@@ -27,14 +27,16 @@ RUN apt-get install -y ros-noetic-rqt*
 #ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
 # Install metavision
-RUN apt-get install -y libcanberra-gtk-module mesa-utils
+RUN apt-get install -y libcanberra-gtk-module mesa-utils ffmpeg
+RUN apt-get install -y cmake libboost-program-options-dev libeigen3-dev
 RUN apt-get install -y python3-pip python3-tk
-RUN apt-get install -y python3.8-dev  # where X is 6, 7 or 8 depending on your Python version (3.6, 3.7 or 3.8)
+RUN apt-get install -y python3.8-dev
 RUN python3 -m pip install pip --upgrade
-RUN python3 -m pip install "numpy==1.19.5" "opencv-python>=4.2.0.34" matplotlib jupyter pandas
+RUN python3 -m pip install "opencv-python>=4.5.5.64" "sk-video==1.1.10" "fire==0.4.0" "numpy<=1.21" pandas scipy h5py
+RUN python3 -m pip install jupyter jupyterlab matplotlib "ipywidgets==7.6.5"
 
-ADD essentials.list /etc/apt/sources.list.d/essentials.list
-RUN apt-get update && apt-get install -y metavision-essentials
+ADD metavision.list /etc/apt/sources.list.d/metavision.list
+RUN apt-get update && apt-get install -y metavision-sdk
 
 # Install profiling tools
 RUN apt-get update && apt-get install -y linux-tools-generic hotspot
